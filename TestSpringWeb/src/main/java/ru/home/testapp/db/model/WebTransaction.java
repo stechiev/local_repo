@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
  * @author STechiev
  */
 @Entity
-@Table(name = "web_transaction", catalog = "easy_core", schema = "")
+@Table(name = "web_transaction", catalog = "test", schema = "")
 @NamedQueries({
     @NamedQuery(name = "WebTransaction.findAll", query = "SELECT w FROM WebTransaction w"),
     @NamedQuery(name = "WebTransaction.findById", query = "SELECT w FROM WebTransaction w WHERE w.id = :id"),

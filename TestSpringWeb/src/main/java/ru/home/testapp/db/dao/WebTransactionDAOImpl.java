@@ -1,9 +1,7 @@
 package ru.home.testapp.db.dao;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
 
