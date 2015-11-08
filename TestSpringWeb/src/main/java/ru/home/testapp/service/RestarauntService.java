@@ -33,10 +33,14 @@ public class RestarauntService {
 	/** adds a restaurant in the system database
 	 * @param restaraunt Restaurant object to add
 	 * @return Restaurant object with setted Id property available by restaurant.getId() method
+	 * @throws VoteSystemException 
 	 */
 	@Transactional
-	public Restaraunt addRestaraunt(Restaraunt restaraunt){
+	public Restaraunt addRestaraunt(Restaraunt restaraunt) throws VoteSystemException{
 		log.info("Restaraunt to add is:" + restaraunt);
+		if(restaraunt.getName()==null || restaraunt.getAddress()==null){
+			throw new VoteSystemException(400, "restaurant fields 'name', 'address' cannot be null");
+		}
 		restaraunt.setCreated(new Date());
 		if(restaraunt.getDishes()!=null){
 			for(Dish dish : restaraunt.getDishes()){

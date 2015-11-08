@@ -133,10 +133,12 @@ public class RestaurantController {
 	 *            "price": "1.45" } ]
 	 * 
 	 *            } }
-	 * @return
-	 * 400 BAD_REQUEST - if userId or restaraunt is null
-	 * <p>
-	 * 403 FORBIDDEN - if user with userId has no admin rights
+	 * @return 400 BAD_REQUEST - if userId or restaraunt is null
+	 *         <p>
+	 *         400 BAD_REQUEST - restaurant fields 'name', 'address' cannot be
+	 *         null
+	 *         <p>
+	 *         403 FORBIDDEN - if user with userId has no admin rights
 	 *         <p>
 	 *         200 OK success - if request was successfully processed
 	 */
@@ -159,8 +161,14 @@ public class RestaurantController {
 			return Response.status(Status.BAD_REQUEST).entity("Restaraunt must not be null").build();
 		}
 
-		Restaraunt restaraunt = restarauntService.addRestaraunt(rInfo.getRestaraunt());
-		return Response.ok().entity(restaraunt).build();
+		try {
+			Restaraunt restaraunt = restarauntService.addRestaraunt(rInfo.getRestaraunt());
+			return Response.ok().entity(restaraunt).build();
+		} catch (VoteSystemException ve) {
+			log.severe(ve.getDescr());
+			return Response.status(ve.getHttpCode()).entity(ve.getDescr()).build();
+		}
+
 	}
 
 }

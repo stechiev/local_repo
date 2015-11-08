@@ -15,7 +15,6 @@ CREATE TABLE `dish` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated` timestamp NULL DEFAULT NULL,
-  `isActive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `dish_restrnt_fk_idx` (`restaraunt_id`),
   CONSTRAINT `dish_restrnt_fk` FOREIGN KEY (`restaraunt_id`) REFERENCES `restaraunt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -70,4 +69,28 @@ CREATE TABLE `vote` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
 
 create or replace view test.daily_stat (restaraunt_id,vote_count) as
-select  v.restaurant_id, count(*) from vote v join question q on v.question_id = q.id where q.active=0 group by v.restaurant_id;
+select  v.restaurant_id, count(*) from vote v join question q on v.question_id = q.id where q.active=1 group by v.restaurant_id;
+
+
+INSERT INTO `test`.`role` ( `id`,`name`) VALUES ('1','ADMIN');
+INSERT INTO `test`.`role` ( `id`,`name`) VALUES ('3','USER');
+
+INSERT INTO `test`.`user` (`name`, `login`, `password`, `role_id` ) VALUES ('Johhny', 'john', 'qwerty', '1');
+INSERT INTO `test`.`user` (`name`, `login`, `password`, `role_id` ) VALUES ('Bobby', 'Bob', 'ytrewq', '3');
+INSERT INTO `test`.`user` (`name`, `login`, `password`, `role_id` ) VALUES ('Mikey', 'Mike', '12345', '3');
+INSERT INTO `test`.`user` (`name`, `login`, `password`, `role_id` ) VALUES ('Kenny', 'Ken', '54321', '3');
+
+
+INSERT INTO `test`.`restaraunt` (`id`, `address`, `phone`, `name`) VALUES ('1', 'some street 5', '7926123456', 'Titty Twister');
+INSERT INTO `test`.`restaraunt` (`id`, `address`, `phone`, `name`) VALUES ('3', 'Novigrad', '7916123456', 'Passiflora brothel');
+INSERT INTO `test`.`restaraunt` (`id`, `address`, `phone`, `name`) VALUES ('7', 'bottom of the sea', '911', 'Krusty Krab');
+INSERT INTO `test`.`restaraunt` (`id`, `address`, `phone`, `name`) VALUES ('13', 'another stupid address', '911', 'Coyote Ugly');
+INSERT INTO `test`.`restaraunt` (`id`, `address`, `phone`, `name`) VALUES ('15', 'Mass Effect, Citadel', '911', 'Purgatory Bar');
+
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('1', '7', 'krabsburger', '2.00', '1');
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('3', '7', 'krabspizza', '4.00', '1');
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('9', '3', 'Grilled Pork', '2.00', '1');
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('11', '3', 'Tussents vine', '4.00', '1');
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('21', '15', 'ryncol', '5.55', '1');
+INSERT INTO `test`.`dish` (`id`, `restaraunt_id`, `name`, `price`, `active`) VALUES ('23', '15', 'Toasted chicken leg', '1.45', '1');
+

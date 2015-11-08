@@ -31,7 +31,7 @@ public class Dish {
 	@JsonIgnore
 	private Restaraunt restaraunt;
 
-	@Column
+	@Column(name="active")
 	@JsonIgnore
 	private boolean isActive;
 
