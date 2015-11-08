@@ -51,7 +51,7 @@ public class RestarauntInfo {
 
 	@Override
 	public String toString() {
-		return "RestarauntInfo [restarauntId=" + restarauntId + ", dishes=" + dishes.toString() + "]";
+		return "RestarauntInfo [restarauntId=" + restarauntId + ", dishes=" + dishes + "]";
 	}
 
 }

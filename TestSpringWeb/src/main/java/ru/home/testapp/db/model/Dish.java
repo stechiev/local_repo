@@ -36,7 +36,7 @@ public class Dish {
 
 	@Column
 	private BigDecimal price;
-	@Column
+	@Column(updatable= false)
 	@NotNull
 	@JsonIgnore
 	private Date created;

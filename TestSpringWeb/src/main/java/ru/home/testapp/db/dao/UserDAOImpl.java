@@ -15,7 +15,7 @@ public class UserDAOImpl extends AbstractDAO<User> {
 
 	public UserDAOImpl() {
 		super();
-		entityClass=User.class;
+		entityClass=User.class; 
 	}
 
 	public UserDAOImpl(Class<User> entityClass) {

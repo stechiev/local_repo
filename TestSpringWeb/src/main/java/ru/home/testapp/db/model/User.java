@@ -39,7 +39,7 @@ public class User {
 	@NotNull
 	private Integer roleId;
 	
-	@Column
+	@Column(updatable= false)
 	@NotNull
 	@JsonIgnore
 	private Date created;

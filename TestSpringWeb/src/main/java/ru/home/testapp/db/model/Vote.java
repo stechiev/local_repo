@@ -9,58 +9,58 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "vote", catalog = "test", schema = "")
+@NamedQueries({
+		@NamedQuery(name = "Vote.findByUserIdAndQuestion", 
+				query = "SELECT v FROM Vote v WHERE v.user = :user AND v.question=:question") })
 public class Vote {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	@ManyToOne(optional = false)
 	private User user;
-	
+
 	@JoinColumn(name = "restaurant_id", referencedColumnName = "id")
 	@ManyToOne(optional = false)
 	private Restaraunt restaraunt;
-	
-	@Column(name="is_fixed")
-	private boolean isFixed;
-	
-	@Column
+
+	@JoinColumn(name = "question_id", referencedColumnName = "id")
+	@ManyToOne(optional = false)
+	private Question question;
+
+	@Column(updatable= false)
 	@NotNull
 	private Date created;
-	
+
 	@Column
 	private Date updated;
-	
+
 	@Column
 	private String descr;
 
-	public Vote() {}
-	
-	
+	public Vote() {
+	}
 
 	public Vote(Integer id) {
 		super();
 		this.id = id;
 	}
-	
-	
 
-	public Vote(User user, Restaraunt restaraunt, boolean isFixed, Date created) {
+	public Vote(User user, Restaraunt restaraunt, Date created) {
 		super();
 		this.user = user;
 		this.restaraunt = restaraunt;
-		this.isFixed = isFixed;
 		this.created = created;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -84,14 +84,6 @@ public class Vote {
 
 	public void setRestaraunt(Restaraunt restaraunt) {
 		this.restaraunt = restaraunt;
-	}
-
-	public boolean isFixed() {
-		return isFixed;
-	}
-
-	public void setFixed(boolean isFixed) {
-		this.isFixed = isFixed;
 	}
 
 	public Date getCreated() {
@@ -118,7 +110,13 @@ public class Vote {
 		this.descr = descr;
 	}
 
+	public Question getQuestion() {
+		return question;
+	}
 
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 
 	@Override
 	public int hashCode() {
@@ -127,8 +125,6 @@ public class Vote {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -146,7 +142,5 @@ public class Vote {
 			return false;
 		return true;
 	}
-	
-	
 
 }

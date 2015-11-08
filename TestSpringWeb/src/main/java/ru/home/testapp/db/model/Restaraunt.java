@@ -36,7 +36,7 @@ public class Restaraunt {
 	@Size(min = 1, max = 255)
 	@NotNull
 	private String name;
-	@Column
+	@Column(updatable= false)
 	@NotNull
 	@JsonIgnore
 	private Date created;
