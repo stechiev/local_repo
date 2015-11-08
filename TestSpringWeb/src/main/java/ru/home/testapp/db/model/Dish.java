@@ -32,6 +32,7 @@ public class Dish {
 	private Restaraunt restaraunt;
 
 	@Column
+	@JsonIgnore
 	private boolean isActive;
 
 	@Column
