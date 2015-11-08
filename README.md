@@ -1,6 +1,10 @@
 # vote system task
 
-Short json api made by using JPA + Hibernate + Spring + JAX-RS + Apache Tomcat 8
+Short json api made by using:<br/>
+1. JPA + Hibernate  for data layer<br/>
+2. Spring for business logic<br/>
+3. JAX-RS Jersey - for web layer<br/>
+4. Apache Tomcat 8.0.28 as a container<br/>
 
 The task is:
 
